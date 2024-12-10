@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block titlePage %}
+    {{lyric.title}}
+{% endblock titlePage %}
+
+{% block contents %}
+    <div class="row">
+        {% comment %} Genres in Details {% endcomment %}
+        <div class="col-md-8">
+            <h3>{{lyric.title}}</h3>
+            <p>Genre: {{lyric.genre}} | {{lyric.published}}</p>
+            <p>Artist: {{lyric.artist}}</p>
+            <p>{{lyric.lyrics|linebreaks}}</p>
+        </div>
+        <div class="col-sm">
+            <h3>Genre</h3>
+            <ul class="list-group list-group-flush">
+                {% for genre in listGenre %}
+                <li class="list-group-item">
+                    <a href="{% url "lyric:genre" genre 1 %}">
+                        {{genre}}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% comment %} Related Songs {% endcomment %}
+            <h3>Related Song</h3>
+            <ul class="list-group list-group-flush">
+                {% for relate in relatedSong %}
+                    {% if forloop.counter is not 3 %}
+                        <li class="list-group-item">
+                            <h4>
+                                <a href="{% url "lyric:detail" relate.slug%}">
+                                    {{relate.title}}
+                                </a>
+                            </h4>
+                            <p>{{relate.published|date}}</p>
+                            <p>{{relate.lyrics|truncatewords:50}}</p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="list-group-item">
+                    <a href="{% url "lyric:genre" lyric.genre 1 %}">More Song</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+{% endblock contents %}

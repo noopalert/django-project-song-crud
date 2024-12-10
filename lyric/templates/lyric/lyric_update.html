@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titlePage %}
+    UPDATE
+{% endblock titlePage %}
+
+{% block contents %}
+    <h1>Add New Song</h1>
+    <form method='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{form.title.id_for_label}}">{{form.title.label}}</label>
+            <input type="text" class="form-control" name='{{form.title.name}}' maxlength='{{form.title.max}}' required id='{{form.title.id_for_label}}' value='{{form.title.value}}'>
+        </div>
+        <div class="form-group">
+            <label for="{{form.lyrics.id_for_label}}">{{form.lyrics.label}}</label>
+            <textarea name="{{form.lyrics.name}}" id="{{form.lyrics.id_for_label}}" class='form-control' rows='10'required>{{form.lyrics.value}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="{{form.genre.id_for_label}}">{{form.genre.label}}</label>
+            <input type="text" class="form-control" name='{{form.genre.name}}' maxlength='{{form.genre.max}}' required id='{{form.genre.id_for_label}}' value='{{form.genre.value}}'>
+        </div>
+        <div class="form-group">
+            <label for="{{form.artist.id_for_label}}">{{form.artist.label}}</label>
+            <input type="text" class="form-control" name='{{form.artist.name}}' maxlength='{{form.artist.max}}' required id='{{form.artist.id_for_label}}' value='{{forn.artist.value}}'>
+        </div>
+        <button class='btn btn-warning mt-2'type='Submit'>Update Song</button>
+        <a href="{% url "lyric:manage" %}" class='btn btn-danger mt-2'>No</a>
+    </form>
+{% endblock contents %}

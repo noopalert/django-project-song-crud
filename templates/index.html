@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block titlePage %}
+    Home
+{% endblock titlePage %}
+
+{% block contents %}
+<h1>Home</h1>
+    <div class="row">
+        {% for song in latest_song_list %}
+        <div class="col-sm-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a class='text-dark'href="{% url "lyric:genre" song.genre 1%}">
+                        {{song.genre}}
+                    </a>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{song.title}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{song.published|date}}</h6>
+                <p class="card-text">{{song.lyrics|truncatewords:10}}</p>
+                <a href="{% url "lyric:detail" song.slug %}" class="card-link">More Detail</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+
+    
+{% endblock contents %}

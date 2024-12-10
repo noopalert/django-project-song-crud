@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block titlePage %}
+    Manage Song
+{% endblock titlePage %}
+
+{% block contents %}
+    <h1>Manage Song</h1>
+    <a class='btn btn-primary btn-block mb-3' href='{% url "lyric:create" %}'>Add New Song</a>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title Song</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Published</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for song in lyric_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{song.title}}</td>
+                    <td>{{song.genre}}</td>
+                    <td>{{song.artist}}</td>
+                    <td>{{song.published}}</td>
+                    <td>
+                        <a class='btn btn-warning' href='{% url "lyric:update" song.id %}'>Edit</a>
+                        <a class='btn btn-danger' href='{% url "lyric:delete" song.id %}'>Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contents %}

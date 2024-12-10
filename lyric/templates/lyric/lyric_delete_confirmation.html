@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titlePage %}
+    Delete
+{% endblock titlePage %}
+
+{% block contents %}
+    <h1>Delete Confirmation</h1>
+    <p>Are You Sure Delete This?</p>
+    <h3>{{lyric.title}} - {{lyric.artist}}</h3>
+    <form method='POST'>
+        {% csrf_token %}
+        <button type='submit' class='btn btn-outline-danger'>Yes</button>
+        <a class='btn btn-outline-primary' href="{% url "lyric:manage" %}">No</a>
+    </form>
+{% endblock contents %}
